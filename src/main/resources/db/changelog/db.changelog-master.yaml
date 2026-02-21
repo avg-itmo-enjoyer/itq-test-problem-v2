@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - includeAll:
+      path: initial-db-state
+      relativeToChangelogFile: true

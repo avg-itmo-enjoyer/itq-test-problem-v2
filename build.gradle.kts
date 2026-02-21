@@ -29,6 +29,11 @@ dependencies {
 }
 
 tasks.withType<Test> {
+    failOnNoDiscoveredTests = false
+    filter {
+        isFailOnNoMatchingTests = false
+    }
+
     useJUnitPlatform {
         val includeTagsProp = "includeTags"
         if (project.hasProperty(includeTagsProp)) {
@@ -41,6 +46,7 @@ tasks.withType<Test> {
             excludeTags(*tags)
         }
     }
+
     testLogging {
         events("PASSED", "SKIPPED", "FAILED")
         showStandardStreams = true
