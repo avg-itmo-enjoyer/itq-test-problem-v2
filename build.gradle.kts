@@ -29,5 +29,21 @@ dependencies {
 }
 
 tasks.withType<Test> {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        val includeTagsProp = "includeTags"
+        if (project.hasProperty(includeTagsProp)) {
+            val tags = project.property(includeTagsProp).toString().split(',').toTypedArray()
+            includeTags(*tags)
+        }
+        val excludeTagsProp = "excludeTags"
+        if (project.hasProperty(excludeTagsProp)) {
+            val tags = project.property(excludeTagsProp).toString().split(',').toTypedArray()
+            excludeTags(*tags)
+        }
+    }
+    testLogging {
+        events("PASSED", "SKIPPED", "FAILED")
+        showStandardStreams = true
+        showCauses = true
+    }
 }
